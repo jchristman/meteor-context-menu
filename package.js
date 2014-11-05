@@ -6,10 +6,10 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-    api.versionsFrom('METEOR@1.0.0');
+    api.versionsFrom('METEOR@1.0');
 
     api.use('jquery');
-    api.use('mizzao:bootstrap-3'); // Need this for the glyphicons
+    api.use('mizzao:bootstrap-3@3.2.0'); // Need this for the glyphicons
 
     api.addFiles('context-menu.js','client');
     api.addFiles('dropdown-submenu.css','client');
