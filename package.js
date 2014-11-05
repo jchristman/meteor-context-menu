@@ -11,6 +11,6 @@ Package.onUse(function(api) {
     api.use('jquery');
     api.use('mizzao:bootstrap-3'); // Need this for the glyphicons
 
-    api.addFiles('contextMenu.min.js','client');
-    api.addFiles('contextMenu.css','client');
+    api.addFiles('context-menu.js','client');
+    api.addFiles('dropdown-submenu.css','client');
 });
