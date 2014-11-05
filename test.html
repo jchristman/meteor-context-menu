@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Context Menu Test</title>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="dropdown-submenu.css">
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="context-menu.js"></script>
+        <script>
+            test_menu = [
+                {
+                    name: 'create',
+                    icon: 'glyphicon-plus',
+                    title: 'Create',
+                },
+                {
+                    name: 'edit',
+                    icon: 'glyphicon-edit',
+                    title: 'Edit'
+                },
+                {
+                    name: 'viewas',
+                    icon: 'glyphicon-list-alt',
+                    title: 'View Data As:',
+                    subMenu : [
+                        {
+                            name: 'viewas-text',
+                            title: 'Text'
+                        },
+                        {
+                            name: 'viewas-image',
+                            title: 'Image',
+                            subMenu: [
+                                {
+                                    name: 'viewas-image-png',
+                                    title: 'PNG'
+                                },
+                                {
+                                    name: 'viewas-image-jpeg',
+                                    title: 'JPEG'
+                                },
+                                {
+                                    name: 'viewas-image-gif',
+                                    title: 'GIF'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {},
+                {
+                    name: 'delete',
+                    icon: 'glyphicon-trash',
+                    title: 'Delete'
+                }
+            ];
+        </script>
+    </head>
+    <body>
+        Right click anywhere!
+        <script>
+            $('body').contextMenu({
+                menuObject: test_menu, 
+                menuSelected: function(invokedOn, selectedItem) {
+                    alert("You selected the menu item " + selectedItem.attr('id'));
+                }
+            });
+        </script>
+    </body>
+</html>
