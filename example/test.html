@@ -1,11 +1,7 @@
 <body>
     Right click anywhere!
     <script>
-        $('body').contextMenu({
-            menuObject: test_menu, 
-            menuSelected: function(invokedOn, selectedItem) {
-                alert("You selected the menu item " + selectedItem.attr('id'));
-            }
-        });
+        context.init({preventDoubleContext: false});
+        context.attach('body', test_menu);
     </script>
 </body>

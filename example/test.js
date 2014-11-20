@@ -1,47 +1,53 @@
 test_menu = [
+{
+    header: 'Example'
+},
+{
+    icon: 'glyphicon-plus',
+    text: 'Create',
+    action: function(e) { alert('Create clicked'); console.log(e); }
+},
+{
+    icon: 'glyphicon-edit',
+    text: 'Edit',
+    action: function(e) { alert('Edit clicked on ' + this.innerHTML); }
+},
+{
+    icon: 'glyphicon-list-alt',
+    text: 'View Data As:',
+    subMenu : [
     {
-        name: 'create',
-        icon: 'glyphicon-plus',
-        title: 'Create',
+        text: 'Text',
+        action: function(e) { alert('Text clicked on ' + this.innerHTML); }
     },
     {
-        name: 'edit',
-        icon: 'glyphicon-edit',
-        title: 'Edit'
-    },
-    {
-        name: 'viewas',
-        icon: 'glyphicon-list-alt',
-        title: 'View Data As:',
-        subMenu : [
-            {
-                name: 'viewas-text',
-                title: 'Text'
-            },
-            {
-                name: 'viewas-image',
-                title: 'Image',
-                subMenu: [
-                    {
-                        name: 'viewas-image-png',
-                        title: 'PNG'
-                    },
-                    {
-                        name: 'viewas-image-jpeg',
-                        title: 'JPEG'
-                    },
-                    {
-                        name: 'viewas-image-gif',
-                        title: 'GIF'
-                    }
-                ]
-            }
+        text: 'Image',
+        subMenu: [
+        {
+            text: 'PNG',
+            action: function(e) { alert('PNG clicked on ' + this.innerHTML); }
+        },
+        {
+            text: 'JPEG',
+            action: function(e) { alert('JPEG clicked on ' + this.innerHTML); }
+        },
+        {
+            text: 'GIF',
+            action: function(e) { alert('GIF clicked on ' + this.innerHTML); }
+        }
         ]
-    },
-    {},
-    {
-        name: 'delete',
-        icon: 'glyphicon-trash',
-        title: 'Delete'
     }
+    ]
+},
+{
+    divider: true
+},
+{
+    header: 'Another Example'
+},
+{
+    icon: 'glyphicon-trash',
+    text: 'Delete',
+    action: function(e) { alert('Delete clicked on ' + this.innerHTML); }
+}
 ];

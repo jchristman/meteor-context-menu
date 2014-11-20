@@ -1,7 +1,7 @@
 meteor-bootstrap-context-menu
 =============================
 
-This library was made because there was not a decent bootstrap library out there for right click contexts, so I wrote my own. It is loosely based on several other libraries that exist, leaning heavily on syntax from https://github.com/s-yadav/contextMenu.js.
+This library is a meteor translation of the http://lab.jakiestfu.com/contextjs/ library, with some modifications made for convenience and for special features.
 
 Installation
 ============
@@ -11,63 +11,65 @@ meteor add jchristman:context-menu
 Defining the menu
 =================
 
-There are two ways to define a menu.
-
-1. Define the menu as an object: this is the preferred way of doing it and is actually why I wrote this instead of using another library. You can define an object with roughly this structure:
+Define the menu as an object: this is a natural way of expressing the context menu. You can define an object with roughly this structure:
 
 ```
 test_menu = [
     {
-        name: 'create',
+        header: 'Example'
+    },
+    {
         icon: 'glyphicon-plus',
-        title: 'Create',
+        text: 'Create',
+        action: function(e) { alert('Create clicked'); console.log(e); }
     },
     {
-        name: 'edit',
         icon: 'glyphicon-edit',
-        title: 'Edit'
+        text: 'Edit',
+        action: function(e) { alert('Edit clicked on ' + this.innerHTML); }
     },
     {
-        name: 'viewas',
         icon: 'glyphicon-list-alt',
-        title: 'View Data As:',
+        text: 'View Data As:',
         subMenu : [
+        {
+            text: 'Text',
+            action: function(e) { alert('Text clicked on ' + this.innerHTML); }
+        },
+        {
+            text: 'Image',
+            subMenu: [
             {
-                name: 'viewas-text',
-                title: 'Text'
+                text: 'PNG',
+                action: function(e) { alert('PNG clicked on ' + this.innerHTML); }
             },
             {
-                name: 'viewas-image',
-                title: 'Image',
-                subMenu: [
-                    {
-                        name: 'viewas-image-png',
-                        title: 'PNG'
-                    },
-                    {
-                        name: 'viewas-image-jpeg',
-                        title: 'JPEG'
-                    },
-                    {
-                        name: 'viewas-image-gif',
-                        title: 'GIF'
-                    }
-                ]
+                text: 'JPEG',
+                action: function(e) { alert('JPEG clicked on ' + this.innerHTML); }
+            },
+            {
+                text: 'GIF',
+                action: function(e) { alert('GIF clicked on ' + this.innerHTML); }
             }
+            ]
+        }
         ]
     },
-    {},
     {
-        name: 'delete',
+        divider: true
+    },
+    {
+        header: 'Another Example'
+    },
+    {
         icon: 'glyphicon-trash',
-        title: 'Delete'
+        text: 'Delete',
+        action: function(e) { alert('Delete clicked on ' + this.innerHTML); }
     }
 ];
 ```
 
-There are several important features here. First, the "name" field is what will be put in as the ID of the thing selected from the context menu, so it's important you make this unique. Second, the "title" field will be the text displayed in the menu for that item. Third, the "icon" field *requires* a glyphicon from bootstrap - you just need to tell it which glyphicon you want. Last, you can define an arbitrary depth menu by adding the subMenu field. It is important to note that the subMenu parent is *not* selectable in that it will not fire the event you define.
-
-2. Define the menu as HTML: this is the traditional way of doing it in libraries I could find.
+There are several important features here. The "text" field will be the text displayed in the menu for that item. The "icon" field *requires* a glyphicon from bootstrap - you just need to tell it which glyphicon you want. Last, you can define an arbitrary depth menu by adding the subMenu field.
 
 Binding the context menu
 ========================
@@ -75,12 +77,12 @@ Binding the context menu
 A very simple example of this is shown.
 
 ```
-$('body').contextMenu({
-            menuObject: test_menu, 
-            menuSelected: function(invokedOn, selectedItem) {
-                alert("You selected the menu item " + selectedItem.attr('id'));
-            }
-        });
+context.attach('body', test_menu);
 ```
 
-In this, we see that it is defining a context menu for the body element. This can be replaced with any jquery selectable element and it will work. You must pass an object to the contextMenu method that either contains a menuObject *or* a menuSelector. The menuObject is a reference to a javascript object and the menuSelector is a string that is the HTML ID of your HTML-defined menu. The menuSelected is a callback function that has a reference to the element that was right-clicked (invokedOn) and a reference to the menu item that was selected. Use these to set up your actions based on menu choices.
+In this, we see that it is defining a context menu for the body element. This can be replaced with any jquery selectable element and it will work. 
+
+Other Options
+=============
+
+For other options, see the documentation at http://lab.jakiestfu.com/contextjs/. There is very little different about this library.
