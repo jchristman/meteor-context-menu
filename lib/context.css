@@ -204,10 +204,12 @@
     border-bottom: none;
 }
 .dropdown-context-left:before {
-    left: calc(100% - 22px);
+    left: auto;
+    right: 9px;
 }
 .dropdown-context-left:after {
-    left: calc(100% - 22px);
+    left: auto;
+    right: 9px;
 }
 
 .dropdown-context-sub:before, .dropdown-context-sub:after {
