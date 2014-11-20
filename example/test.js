@@ -5,12 +5,12 @@ test_menu = [
 {
     icon: 'glyphicon-plus',
     text: 'Create',
-    action: function(e) { alert('Create clicked'); console.log(e); }
+    action: function(e, selector) { alert('Create clicked on ' + selector.prop("tagName")); }
 },
 {
     icon: 'glyphicon-edit',
     text: 'Edit',
-    action: function(e) { alert('Edit clicked on ' + this.innerHTML); }
+    action: function(e, selector) { alert('Edit clicked on ' + selector.prop("tagName")); }
 },
 {
     icon: 'glyphicon-list-alt',
@@ -18,22 +18,22 @@ test_menu = [
     subMenu : [
     {
         text: 'Text',
-        action: function(e) { alert('Text clicked on ' + this.innerHTML); }
+        action: function(e, selector) { alert('Text clicked on ' + selector.prop("tagName")); }
     },
     {
         text: 'Image',
         subMenu: [
         {
             text: 'PNG',
-            action: function(e) { alert('PNG clicked on ' + this.innerHTML); }
+            action: function(e, selector) { alert('PNG clicked on ' + selector.prop("tagName")); }
         },
         {
             text: 'JPEG',
-            action: function(e) { alert('JPEG clicked on ' + this.innerHTML); }
+            action: function(e, selector) { alert('JPEG clicked on ' + selector.prop("tagName")); }
         },
         {
             text: 'GIF',
-            action: function(e) { alert('GIF clicked on ' + this.innerHTML); }
+            action: function(e, selector) { alert('GIF clicked on ' + selector.prop("tagName")); }
         }
         ]
     }
@@ -48,6 +48,6 @@ test_menu = [
 {
     icon: 'glyphicon-trash',
     text: 'Delete',
-    action: function(e) { alert('Delete clicked on ' + this.innerHTML); }
+    action: function(e, selector) { alert('Delete clicked on ' + selector.prop("tagName")); }
 }
 ];
