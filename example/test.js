@@ -23,18 +23,9 @@ test_menu = [
     {
         text: 'Image',
         subMenu: [
-        {
-            text: 'PNG',
-            action: function(e, selector) { alert('PNG clicked on ' + selector.prop("tagName")); }
-        },
-        {
-            text: 'JPEG',
-            action: function(e, selector) { alert('JPEG clicked on ' + selector.prop("tagName")); }
-        },
-        {
-            text: 'GIF',
-            action: function(e, selector) { alert('GIF clicked on ' + selector.prop("tagName")); }
-        }
+            {
+                menu_item_src : 'exampleMenuItemSource'
+            }
         ]
     }
     ]
@@ -51,3 +42,25 @@ test_menu = [
     action: function(e, selector) { alert('Delete clicked on ' + selector.prop("tagName")); }
 }
 ];
+
+exampleMenuItemSource = function(selector) {
+    if ($(selector).attr('id') == 'PNG_JPG') {
+        return [
+                {
+                    text: 'PNG',
+                    action: function(e, selector) { alert('Text clicked on ' + selector.prop("tagName")); }
+                },
+                {
+                    text: 'JPG',
+                    action: function(e, selector) { alert('Text clicked on ' + selector.prop("tagName")); }
+                }
+            ]
+    } else {
+        return [
+                {
+                    icon: 'glyphicon-exclamation-sign',
+                    text: 'No image types supported!'
+                }
+            ]
+    }
+}

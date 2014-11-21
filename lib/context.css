@@ -234,3 +234,7 @@
 .compressed-context .nav-header{
     padding:1px 13px;
     }
+
+.dynamic-menu-src {
+    display: none;
+}
