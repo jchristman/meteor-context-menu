@@ -1,12 +1,19 @@
 <body>
-    <div id="rightClick" style="position: absolute; top: 0; left: 0; height: 50%; width: 100%; background: lime;">
-        Right click here works!
+    <div id="rightClick" style="position: absolute; top: 0; left: 0; height: 50%; width: 100%;">
+        <div id="PNG_JPG" style="position: absolute; top: 0; left:0; height: 100%; width: 50%; background: lime;">
+            Right click here for dynamic menu with PNG/JPG as options.
+        </div>
+        <div id="NO_OPTIONS" style="position: absolute; top: 0; left: 50%; height: 100%; width: 50%; background: orange;">
+            This will have no options in the dynamic menu.
+        </div>
     </div>
-    <div style="position: absolute; top: 50%; left: 0; height: 50%; width: 100%; background: yellow;">
-        Right click here does not work!
+    <div id="notDynamic" style="position: absolute; top: 50%; left: 0; height: 50%; width: 100%; background: yellow;">
+        Right click here is not dynamic.
     </div>
     <script>
         context.init({preventDoubleContext: false});
-        context.attach('#rightClick', test_menu);
+        context.attach('#PNG_JPG', test_menu);
+        context.attach('#NO_OPTIONS', test_menu);
+        context.attach('#notDynamic', test_menu2);
     </script>
 </body>
