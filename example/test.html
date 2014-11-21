@@ -1,7 +1,12 @@
 <body>
-    Right click anywhere!
+    <div id="rightClick" style="position: absolute; top: 0; left: 0; height: 50%; width: 100%; background: lime;">
+        Right click here works!
+    </div>
+    <div style="position: absolute; top: 50%; left: 0; height: 50%; width: 100%; background: yellow;">
+        Right click here does not work!
+    </div>
     <script>
         context.init({preventDoubleContext: false});
-        context.attach('body', test_menu);
+        context.attach('#rightClick', test_menu);
     </script>
 </body>
