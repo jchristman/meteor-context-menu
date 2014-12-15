@@ -1,7 +1,7 @@
 Package.describe({
     name: 'jchristman:context-menu',
     summary: 'Meteor package to wrap a bootstrap context menu',
-    version: '1.1.2_4',
+    version: '1.1.3',
     git: 'https://github.com/suntzuII/meteor-bootstrap-context-menu.git'
 });
 
