@@ -8,12 +8,17 @@ Installation
 
 meteor add jchristman:context-menu
 
+Recent Additions
+================
+
+I just add automatic capturing of the Blaze context of the right-clicked item. It is now passed as a third argument to the "action" function defined in the data structure definition of the right-click menu. See the [example](https://github.com/jchristman/meteor-bootstrap-context-menu/tree/master/example) for a more complete example and the [live demo](http://contextmenu.meteor.com).
+
 Defining the menu
 =================
 
 Define the menu as an object: this is a natural way of expressing the context menu. You can define an object with roughly this structure:
 
-```
+```js
 test_menu = {
     id: 'TEST-MENU',
     data: [
@@ -23,12 +28,12 @@ test_menu = {
         {
             icon: 'glyphicon-plus',
             text: 'Create',
-            action: function(e, selector) { alert('Create clicked on ' + selector.prop("tagName")); }
+            action: function(e, selector, context) { alert('Create clicked on ' + selector.prop("tagName")); }
         },
         {
             icon: 'glyphicon-edit',
             text: 'Edit',
-            action: function(e, selector) { alert('Edit clicked on ' + selector.prop("tagName")); }
+            action: function(e, selector, context) { alert('Edit clicked on ' + selector.prop("tagName")); }
         },
         {
             icon: 'glyphicon-list-alt',
@@ -36,13 +41,13 @@ test_menu = {
             subMenu : [
             {
                 text: 'Text',
-                action: function(e, selector) { alert('Text clicked on ' + selector.prop("tagName")); }
+                action: function(e, selector, context) { alert('Text clicked on ' + selector.prop("tagName")); }
             },
             {
                 text: 'Image',
                 subMenu: [
                     {
-                        menu_item_src : exampleMenuItemSource
+                        menu_item_src : exampleMenuItemSource // This function will get two arguments: the selector and the blaze context of the clicked element.
                     }
                 ]
             }
@@ -57,13 +62,13 @@ test_menu = {
         {
             icon: 'glyphicon-trash',
             text: 'Delete',
-            action: function(e, selector) { alert('Delete clicked on ' + selector.prop("tagName")); }
+            action: function(e, selector, context) { alert('Delete clicked on ' + selector.prop("tagName")); }
         }
     ]
 };
 ```
 
-```
+```js
 test_menu2 = [
     {
         header: 'Example'
@@ -71,12 +76,12 @@ test_menu2 = [
     {
         icon: 'glyphicon-plus',
         text: 'Create',
-        action: function(e, selector) { alert('Create clicked on ' + selector.prop("tagName")); }
+        action: function(e, selector, context) { alert('Create clicked on ' + selector.prop("tagName")); }
     },
     {
         icon: 'glyphicon-edit',
         text: 'Edit',
-        action: function(e, selector) { alert('Edit clicked on ' + selector.prop("tagName")); }
+        action: function(e, selector, context) { alert('Edit clicked on ' + selector.prop("tagName")); }
     }
 ];
 ```
@@ -88,7 +93,7 @@ Binding the context menu
 
 A very simple example of this is shown.
 
-```
+```js
 context.attach('body', test_menu);
 ```
 

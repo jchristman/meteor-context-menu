@@ -1,15 +1,9 @@
 <body>
     <div id="rightClick" style="position: absolute; top: 0; left: 0; height: 50%; width: 100%;">
-        <div id="PNG_JPG" style="position: absolute; top: 0; left:0; height: 100%; width: 50%; background: lime;">
-            Right click here for dynamic menu with PNG/JPG as options.
-        </div>
-        <div id="NO_OPTIONS" style="position: absolute; top: 0; left: 50%; height: 100%; width: 50%; background: orange;">
-            This will have no options in the dynamic menu.
-        </div>
+        {{> PNG_JPG}}
+        {{> NO_OPTIONS}}
     </div>
-    <div id="notDynamic" style="position: absolute; top: 50%; left: 0; height: 50%; width: 100%; background: yellow;">
-        Right click here is not dynamic.
-    </div>
+    {{> notDynamic}}
     <script>
         context.init({preventDoubleContext: false});
         context.attach('#PNG_JPG', test_menu);
@@ -17,3 +11,25 @@
         context.attach('#notDynamic', test_menu2);
     </script>
 </body>
+
+<template name='PNG_JPG'>
+{{#with contextOne}}
+    <div id="PNG_JPG" style="position: absolute; top: 0; left:0; height: 100%; width: 50%; background: lime;">
+        Right click here for dynamic menu with PNG/JPG as options.
+    </div>
+{{/with}}
+</template>
+<template name='NO_OPTIONS'>
+{{#with contextTwo}}
+    <div id="NO_OPTIONS" style="position: absolute; top: 0; left: 50%; height: 100%; width: 50%; background: orange;">
+        This will have no options in the dynamic menu.
+    </div>
+{{/with}}
+</template>
+<template name='notDynamic'>
+{{#with contextThree}}
+    <div id="notDynamic" style="position: absolute; top: 50%; left: 0; height: 50%; width: 100%; background: yellow;">
+        Right click here is not dynamic.
+    </div>
+{{/with}}
+</template>
