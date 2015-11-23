@@ -1,18 +1,29 @@
 Package.describe({
     name: 'jchristman:context-menu',
-    summary: 'Meteor package to wrap a bootstrap context menu',
-    version: '1.2.0_1',
-    git: 'https://github.com/jchristman/meteor-bootstrap-context-menu.git'
+    summary: 'Build context menus the meteor way.',
+    version: '2.0.0',
+    git: 'https://github.com/jchristman/meteor-context-menu.git'
 });
 
 Package.onUse(function(api) {
-    api.versionsFrom('METEOR@1.0');
+    api.versionsFrom('METEOR@1.2');
 
     api.use('jquery');
-    api.use('twbs:bootstrap@3.3.2'); // Need this for the glyphicons
+    api.use('ecmascript');
+    api.use('check');
+    api.use('templating');
+    api.use('reactive-var');
+    api.use('twbs:bootstrap@3.3.5'); // Need this for the glyphicons
+    api.use('gwendall:template-animations@0.2.2'); // Use for fade in and out
+    api.use('natestrauser:animate-css@3.4.0');
 
-    api.addFiles('lib/context.js','client');
-    api.addFiles('lib/context.css','client');
+    api.addFiles('context/context.js','client');
+    api.addFiles('context/context.html','client');
+    api.addFiles('context/context.css','client');
+    api.addFiles('context/menu-template.html','client');
+    api.addFiles('context/menu-template.js','client');
+    api.addFiles('context/animate.js','client');
+    api.addFiles('context/animate.css','client');
 
-    api.export('context', 'client');
+    api.export('Context', 'client');
 });

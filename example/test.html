@@ -1,35 +1,18 @@
 <body>
-    <div id="rightClick" style="position: absolute; top: 0; left: 0; height: 50%; width: 100%;">
-        {{> PNG_JPG}}
-        {{> NO_OPTIONS}}
-    </div>
-    {{> notDynamic}}
-    <script>
-        context.init({preventDoubleContext: false});
-        context.attach('#PNG_JPG', test_menu);
-        context.attach('#NO_OPTIONS', test_menu);
-        context.attach('#notDynamic', test_menu2);
-    </script>
+    {{> test}}
 </body>
 
-<template name='PNG_JPG'>
-{{#with contextOne}}
-    <div id="PNG_JPG" style="position: absolute; top: 0; left:0; height: 100%; width: 50%; background: lime;">
-        Right click here for dynamic menu with PNG/JPG as options.
+<template name="test">
+    <div id='example1' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: red' {{Context.attach 'example1'}}>
+        Example 1
+        <div id='example2' style='position: absolute; top: 50px; left: 50px; width: calc(50% - 50px); height: calc(100% - 100px); background-color: yellow' {{Context.attach 'example2'}}>
+            Example 2 (allows bubble)
+        </div>
+        <div id='example3' style='position: absolute; top: 50px; left: 50%; width: calc(50% - 50px); height: calc(100% - 100px); background-color: orange' {{Context.attach 'example3'}}>
+            Example 3 (stops bubble)
+            <div id='example4' style='position: absolute; top: calc(50% + 25px); left: 25px; width: calc(100% - 50px); height: calc(50% - 50px); background-color: green' {{Context.attach 'example4' 'example5'}}>
+                Example 4 (multiple menus attached)
+            </div>
+        </div>
     </div>
-{{/with}}
-</template>
-<template name='NO_OPTIONS'>
-{{#with contextTwo}}
-    <div id="NO_OPTIONS" style="position: absolute; top: 0; left: 50%; height: 100%; width: 50%; background: orange;">
-        This will have no options in the dynamic menu.
-    </div>
-{{/with}}
-</template>
-<template name='notDynamic'>
-{{#with contextThree}}
-    <div id="notDynamic" style="position: absolute; top: 50%; left: 0; height: 50%; width: 100%; background: yellow;">
-        Right click here is not dynamic.
-    </div>
-{{/with}}
 </template>

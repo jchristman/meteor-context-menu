@@ -1,105 +1,85 @@
 meteor-bootstrap-context-menu
 =============================
 
-This library is a meteor translation of the http://lab.jakiestfu.com/contextjs/ library, with some modifications made for convenience and for special features.
+Context menus the meteor way. Define the menus programatically and then attach them in a simple way. See the [live example](http://contextmenu.meteor.com/).
 
 Installation
 ============
 
 meteor add jchristman:context-menu
 
-Recent Additions
-================
+Version 2.0
+===========
 
-I just add automatic capturing of the Blaze context of the right-clicked item. It is now passed as a third argument to the "action" function defined in the data structure definition of the right-click menu. See the [example](https://github.com/jchristman/meteor-bootstrap-context-menu/tree/master/example) for a more complete example and the [live demo](http://contextmenu.meteor.com).
+This version breaks compatability with old version - you will need to rewrite code that uses it.
+
+Features
+========
+
+* Chainable, programatic construction syntax
+* Convenient attaching method
+* Combined menus if right click bubbles to elements deeper in the page
+* Smart detection of context direction (will drop 'up' if the menu would go off the bottom of the page and drop 'left' if it would go off right side of page)
+* Ability to attach multiple menus to the same element and automatically combine them
+* Ecmascript 6 classes and coding
 
 Defining the menu
 =================
 
-Define the menu as an object: this is a natural way of expressing the context menu. You can define an object with roughly this structure:
+Define the menu programatically using the Context.Menu class and chained function calls, and then add it to the library namespace in order to use it. First, create a new Context.Menu using the following syntax:
 
 ```js
-test_menu = {
-    id: 'TEST-MENU',
-    data: [
-        {
-            header: 'Example'
-        },
-        {
-            icon: 'glyphicon-plus',
-            text: 'Create',
-            action: function(e, selector, context) { alert('Create clicked on ' + selector.prop("tagName")); }
-        },
-        {
-            icon: 'glyphicon-edit',
-            text: 'Edit',
-            action: function(e, selector, context) { alert('Edit clicked on ' + selector.prop("tagName")); }
-        },
-        {
-            icon: 'glyphicon-list-alt',
-            text: 'View Data As:',
-            subMenu : [
-            {
-                text: 'Text',
-                action: function(e, selector, context) { alert('Text clicked on ' + selector.prop("tagName")); }
-            },
-            {
-                text: 'Image',
-                subMenu: [
-                    {
-                        menu_item_src : exampleMenuItemSource // This function will get two arguments: the selector and the blaze context of the clicked element.
-                    }
-                ]
-            }
-            ]
-        },
-        {
-            divider: true
-        },
-        {
-            header: 'Another Example'
-        },
-        {
-            icon: 'glyphicon-trash',
-            text: 'Delete',
-            action: function(e, selector, context) { alert('Delete clicked on ' + selector.prop("tagName")); }
-        }
-    ]
-};
+let test = new Context.Menu('test'); // The string passed to the constructor is its ID. It must be unique and will be used to attach the menu to your elements.
 ```
+
+Next build the menu. There are three functions on the Context.Menu class that you should use:
 
 ```js
-test_menu2 = [
-    {
-        header: 'Example'
-    },
-    {
-        icon: 'glyphicon-plus',
-        text: 'Create',
-        action: function(e, selector, context) { alert('Create clicked on ' + selector.prop("tagName")); }
-    },
-    {
-        icon: 'glyphicon-edit',
-        text: 'Edit',
-        action: function(e, selector, context) { alert('Edit clicked on ' + selector.prop("tagName")); }
-    }
-];
+menu.addHeader(header)
+menu.addItem(text, action, icon, subMenu)
+menu.addDivider()
 ```
 
-There are several important features here. The "text" field will be the text displayed in the menu for that item. The "icon" field *requires* a glyphicon from bootstrap - you just need to tell it which glyphicon you want. Last, you can define an arbitrary depth menu by adding the subMenu field.
+These three functions each return the menu object and are chainable, making construction of a menu easy. See below:
 
-Binding the context menu
+```js
+let exampleMenu5 = (new Context.Menu('example5'))
+    .addHeader('Example 5')
+    .addItem('9', function (context, element) { alert('9 clicked on ' + context.target.id) })
+```
+
+The arguments for the three functions are of the types shown below:
+
+* addHeader
+    * header
+        * String
+* addItem
+    * text
+        * String or Function
+            * If a function, the context of the overall menu is passed to the function, which includes the target that was right clicked in the context. This allows you to generate dynamic content in the menu based on what was right clicked.
+    * action
+        * Function
+            * There are two arguments passed to the action function - the context of the menu and the element that was selected. The context of the menu includes the target that was right clicked.
+    * icon
+        * String
+            * Should be a glyphicon name
+    * subMenu
+        * An array of submenu items. Can be easily built by building a new Context.Menu and passing its .menu field as the argument here. See the example below.
+* addDivider (no arguments)
+
+Last, add the menu to the Context namespace. Like so:
+
+```js
+Context.addMenu(exampleMenu5);
+```
+
+Attaching the context menu
 ========================
 
-A very simple example of this is shown.
+It is very easy to attach the context menu to your element. In the template, simply do:
 
-```js
-context.attach('body', test_menu);
+```html
+<li class='someClass' {{Context.attach 'example1' 'optionalExample2' 'optionalHoweverManyYouWant'}}></li>
 ```
 
-In this, we see that it is defining a context menu for the body element. This can be replaced with any jquery selectable element and it will work. 
-
-Other Options
-=============
-
-For other options, see the documentation at http://lab.jakiestfu.com/contextjs/. There is very little different about this library.
+Context.attach will take any number of menus and will generate the appropriate HTML code for your element. The naming is important - the strings that you pass to Context.attach **must** be the same as the string you pass to the Context.Menu constructor.

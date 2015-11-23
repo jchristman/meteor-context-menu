@@ -1,0 +1,38 @@
+<template name="_context_menu">
+<ul class="dropdown-menu dropdown-context dropdown-root {{upOrLeft}}" style="top: {{getTop}}px; left: {{getLeft}}px; display: block;" oncontextmenu="javascript:Context.cancel(event); return false;">
+    {{#each menuitems}}
+        {{#with root}}
+            {{> Template.dynamic template=_context_menu_itemType data=this}}
+        {{/with}}
+    {{/each}}
+</ul>
+</template>
+
+<template name="_context_menu_header">
+<li class="nav-header">{{header}}</li>
+</template>
+
+<template name="_context_menu_divider">
+<li class="divider"></li>
+</template>
+
+<template name="_context_menu_item">
+<li class={{isDropdown}}>
+    <a tabindex="-1" style="cursor: pointer" href={{href}}>
+        {{#if icon}}<span class="glyphicon {{icon}}"></span>&nbsp;&nbsp;{{/if}}{{getText}}
+    </a>
+    {{#if subMenu}}
+        {{> _context_menu_submenu menuitems=subMenu}}
+    {{/if}}
+</li>
+</template>
+
+<template name="_context_menu_submenu">
+<ul class="dropdown-menu dropdown-context dropdown-context-sub">
+    {{#each menuitems}}
+        {{#with root}}
+            {{> Template.dynamic template=_context_menu_itemType data=this}}
+        {{/with}}
+    {{/each}}
+</ul>
+</template>
