@@ -1,4 +1,4 @@
-meteor-bootstrap-context-menu
+meteor-context-menu
 =============================
 
 Context menus the meteor way. Define the menus programatically and then attach them in a simple way. See the [live example](http://contextmenu.meteor.com/).
