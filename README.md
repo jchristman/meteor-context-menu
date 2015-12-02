@@ -8,6 +8,11 @@ Installation
 
 meteor add jchristman:context-menu
 
+Changelog
+=========
+
+- Removed bootstrap dependency and made icons not precede with the word "glyphicon".
+
 Version 2.0
 ===========
 
@@ -62,7 +67,7 @@ The arguments for the three functions are of the types shown below:
             * There are two arguments passed to the action function - the context of the menu and the element that was selected. The context of the menu includes the target that was right clicked.
     * icon
         * String
-            * Should be a glyphicon name
+            * A string representing any classes you want applied to an <icon></icon> element preceding the text on a menu item. For example, making this argument "glyphicon glyphicon-list-alt" will give it a glyphicon styling (if you have bootstrap installed as a package).
     * subMenu
         * An array of submenu items. Can be easily built by building a new Context.Menu and passing its .menu field as the argument here. See the example below.
 * addDivider (no arguments)

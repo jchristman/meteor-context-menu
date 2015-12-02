@@ -19,7 +19,7 @@
 <template name="_context_menu_item">
 <li class={{isDropdown}}>
     <a tabindex="-1" style="cursor: pointer" href={{href}}>
-        {{#if icon}}<span class="glyphicon {{icon}}"></span>&nbsp;&nbsp;{{/if}}{{getText}}
+        {{#if icon}}<icon class="{{icon}}"></icon>&nbsp;&nbsp;{{/if}}{{getText}}
     </a>
     {{#if subMenu}}
         {{> _context_menu_submenu menuitems=subMenu}}

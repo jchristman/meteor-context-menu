@@ -5,7 +5,7 @@ if (Meteor.isClient) {
             .addItem('1', function (context, element) { alert('1 clicked on ' + context.target.id) })
             .addItem('2', function (context, element) { alert('2 clicked on ' + context.target.id) })
             .addDivider()
-            .addItem('Nested', undefined, 'glyphicon-list-alt', 
+            .addItem('Nested', undefined, 'glyphicon glyphicon-list-alt', 
                 (new Context.Menu('Example 1 Submenu 1'))
                     .addItem('3', function (context, element) { alert('3 clicked on ' + context.target.id) })
                     .addItem('4', function (context, element) { alert('4 clicked on ' + context.target.id) })

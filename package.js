@@ -1,7 +1,7 @@
 Package.describe({
     name: 'jchristman:context-menu',
     summary: 'Build context menus the meteor way.',
-    version: '2.0.0',
+    version: '2.0.1',
     git: 'https://github.com/jchristman/meteor-context-menu.git'
 });
 
@@ -13,7 +13,6 @@ Package.onUse(function(api) {
     api.use('check');
     api.use('templating');
     api.use('reactive-var');
-    api.use('twbs:bootstrap@3.3.5'); // Need this for the glyphicons
     api.use('gwendall:template-animations@0.2.2'); // Use for fade in and out
     api.use('natestrauser:animate-css@3.4.0');
 
