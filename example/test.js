@@ -3,7 +3,7 @@ if (Meteor.isClient) {
         var exampleMenu1 = (new Context.Menu('example1'))
             .addHeader('Example 1')
             .addItem('1', function (context, element) { alert('1 clicked on ' + context.target.id) })
-            .addItem('2', function (context, element) { alert('2 clicked on ' + context.target.id) })
+            .addItem('2', function (context, element) { alert('2 clicked on ' + context.target.id) }, 'fa fa-home')
             .addDivider()
             .addItem('Nested', undefined, 'glyphicon glyphicon-list-alt', 
                 (new Context.Menu('Example 1 Submenu 1'))

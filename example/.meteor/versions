@@ -22,6 +22,7 @@ ecmascript@0.1.6
 ecmascript-runtime@0.2.6
 ejson@1.0.7
 fastclick@1.0.7
+fortawesome:fontawesome@4.5.0
 geojson-utils@1.0.4
 gwendall:jquery-animation-callback@0.1.2
 gwendall:template-animations@0.2.2
